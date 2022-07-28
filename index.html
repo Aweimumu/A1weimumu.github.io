@@ -200,8 +200,12 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># String StirngBuffer和StringBuilder的比较</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> StringBuilder和String Buffer非常类似 均可以代表字符串的序列 而且方法也一样</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> String:不可以变字符序列 效率低 但是复用性高</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> StringBuffer:可变字符序列，效率高 线程安全 </span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> StringBuilder 可变字符序列 效率最高 但是线程不安全</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> String的使用说明</span><br><span class="line"></span><br><span class="line">   <span class="number">1.</span> String s=<span class="string">&quot;a&quot;</span>;<span class="comment">//创建了一个字符串</span></span><br><span class="line"></span><br><span class="line">   <span class="number">2.</span> s+=“b”<span class="comment">//实际上原理的a字符串已经丢失现在又是重新生产了一个字符串  System.currentTimeMillis记录当前时间</span></span><br><span class="line"></span><br><span class="line"> String StringBuffer StringBuilder的选择</span><br><span class="line">   <span class="number">1.</span>如果字符串存在大量的修改操作 一般使用StringBuffer和StringBuilder</span><br><span class="line">   <span class="number">2.</span>如果字符串存在大量的修改操作 并是单线程的情况下 使用StringBuilder</span><br><span class="line">   <span class="number">3.</span>如果字符串存在大量的修改操作 并是多线程的情况下 使用StringBuffer</span><br><span class="line">   <span class="number">4.</span>如果我们的字符很少修改,别多个对象引用，使用String</span><br><span class="line">       StringBuilder 的方法很StringBuffer的方法是一致的	</span><br></pre></td></tr></table></figure>
 
-
-
+<h1 id="ArraList的底层结构和源码分析"><a href="#ArraList的底层结构和源码分析" class="headerlink" title="ArraList的底层结构和源码分析"></a>ArraList的底层结构和源码分析</h1><ol>
+<li>ArrayList的底层底层操作机制ArrayList中维护了 Object类型的数组elementData</li>
+<li>当创建ArrayList对象时 如果使用的是无参构造器 则初始换elementData容量为0 第一次添加 则扩容为10 如果需要再次扩容 则会扩容1.5倍</li>
+<li>如果需要使用指定大小的构造器 则初始化elementData容量为指定大小 如果需要扩容则会扩容elementData为1.5倍</li>
+<li>简单的来讲 如果没有指定大小 初始化为0 添加输入对象变为10 不够时扩容1.5倍  如果指定了大小初始化就是自己指定的大小如果需要扩容就增加1.5倍 ArraList的底层是一个element Object[]的数组</li>
+</ol>
 
       
 
