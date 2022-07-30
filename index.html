@@ -237,6 +237,42 @@
 <li>如果一条列表的元素到达了 8个时 也会扩容到两倍 但是一旦扩容到64时就会变成红黑树</li>
 <li>扩容机制  每次添加一个元素seize都会++ size一道12个时就扩容  链表到达8个时也会扩容 </li>
 </ol>
+<h2 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h2><ol>
+<li>LInkedHashSet是HashSet的子类</li>
+<li>LInkendHashSet底层是一个LinkedHashMap底层维护了 一个数组双向列表</li>
+<li>LinkedHashSet根据元素的hashcode值来决定元素的存储位置 同时使用链表维护元素的次序 使得元素看起来像是顺讯保存</li>
+<li>LinkendHashSet不允许添加重复元素</li>
+</ol>
+<h1 id="HashMap的底层机制和扩容机制"><a href="#HashMap的底层机制和扩容机制" class="headerlink" title="HashMap的底层机制和扩容机制"></a>HashMap的底层机制和扩容机制</h1><ol>
+<li> HashMap底层维护了Node类型的数组table 默认为null</li>
+<li>当创建对象时 将加载因子初始化为0.75</li>
+<li>当添加Key-va时 通过Key的哈希值得到table的索引 然后判断该索引的处是否有元素 如果没有元素直接加入 如果有元素 继续判断该元素的key是否和准备加入的Key相等 如果相等 则就替换如果不相等需要判断是树结构还是链表结构作出相应的处理 如果添加时发现容量不够 则需要扩容</li>
+<li>第一次添加 则需要扩容到16 临界值是12</li>
+<li>以后再扩容则需要扩容table的容量的两倍 临界值是原来的两倍 以此类推</li>
+<li>在Java8中如果一条链表元素个数超过8个时 并且table的大小大于等于六十四就会净化成为红黑树</li>
+</ol>
+<h1 id="HashTable接口的实现类"><a href="#HashTable接口的实现类" class="headerlink" title="HashTable接口的实现类"></a>HashTable接口的实现类</h1><ol>
+<li>存放的元素时键值队 k-v</li>
+<li><strong>hashtable的键和值不能为null</strong></li>
+<li>hashTabled使用方法基本上和hashMap一样</li>
+<li><strong>hashTable是线程安全的 hashMap是线程不安全的</strong></li>
+</ol>
+<h1 id="HashTable的扩容机制"><a href="#HashTable的扩容机制" class="headerlink" title="HashTable的扩容机制"></a>HashTable的扩容机制</h1><ol>
+<li>底层有数组 HashTable$Entry[] 初始化大小是11</li>
+<li>临界值是0.75</li>
+<li>扩容 按照自己的扩容机制来扩容</li>
+<li>执行 方法addEntry 封装到Entry</li>
+<li>当满足 添加的数量大于临界值时就自动的扩容</li>
+<li>扩容的机制是int newCapacity = (oldCapacity &lt;&lt; 1) + 1 的大小扩容 2倍加1</li>
+</ol>
+<h1 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h1><p>HashMap 是版本1.2出来的</p>
+<p>Hashtable是1.0出来的</p>
+<p>HashMap是线程不安全的</p>
+<p>HashTable是线程安全的</p>
+<p>HashMap效率高</p>
+<p>Hashtable效率不高</p>
+<p>HashMap允许NUll值</p>
+<p>HashTable不允许有空值</p>
 
       
 

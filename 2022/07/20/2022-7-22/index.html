@@ -16,7 +16,7 @@
 <meta property="og:description" content="Eexception(异常处理)重点！！！！异常介绍： java语言中 将程序执行中发生的不正常情况下称为 “异常”语法错误或者逻辑错误不是异常 执行过程中所发生的异常事件可以分为两类 Error Java虚拟机无法解决的严重错误 如JVM 系统内部错误 资源耗尽等 Exception：其他因编程错误或偶然或偶然的外的元素导致的一般性问题 Exception分两大类 运行时异常（程序运行时发生的异">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-19T22:57:07.224Z">
-<meta property="article:modified_time" content="2022-07-29T04:01:07.041Z">
+<meta property="article:modified_time" content="2022-07-30T09:56:34.639Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -239,6 +239,42 @@
 <li>如果一条列表的元素到达了 8个时 也会扩容到两倍 但是一旦扩容到64时就会变成红黑树</li>
 <li>扩容机制  每次添加一个元素seize都会++ size一道12个时就扩容  链表到达8个时也会扩容 </li>
 </ol>
+<h2 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h2><ol>
+<li>LInkedHashSet是HashSet的子类</li>
+<li>LInkendHashSet底层是一个LinkedHashMap底层维护了 一个数组双向列表</li>
+<li>LinkedHashSet根据元素的hashcode值来决定元素的存储位置 同时使用链表维护元素的次序 使得元素看起来像是顺讯保存</li>
+<li>LinkendHashSet不允许添加重复元素</li>
+</ol>
+<h1 id="HashMap的底层机制和扩容机制"><a href="#HashMap的底层机制和扩容机制" class="headerlink" title="HashMap的底层机制和扩容机制"></a>HashMap的底层机制和扩容机制</h1><ol>
+<li> HashMap底层维护了Node类型的数组table 默认为null</li>
+<li>当创建对象时 将加载因子初始化为0.75</li>
+<li>当添加Key-va时 通过Key的哈希值得到table的索引 然后判断该索引的处是否有元素 如果没有元素直接加入 如果有元素 继续判断该元素的key是否和准备加入的Key相等 如果相等 则就替换如果不相等需要判断是树结构还是链表结构作出相应的处理 如果添加时发现容量不够 则需要扩容</li>
+<li>第一次添加 则需要扩容到16 临界值是12</li>
+<li>以后再扩容则需要扩容table的容量的两倍 临界值是原来的两倍 以此类推</li>
+<li>在Java8中如果一条链表元素个数超过8个时 并且table的大小大于等于六十四就会净化成为红黑树</li>
+</ol>
+<h1 id="HashTable接口的实现类"><a href="#HashTable接口的实现类" class="headerlink" title="HashTable接口的实现类"></a>HashTable接口的实现类</h1><ol>
+<li>存放的元素时键值队 k-v</li>
+<li><strong>hashtable的键和值不能为null</strong></li>
+<li>hashTabled使用方法基本上和hashMap一样</li>
+<li><strong>hashTable是线程安全的 hashMap是线程不安全的</strong></li>
+</ol>
+<h1 id="HashTable的扩容机制"><a href="#HashTable的扩容机制" class="headerlink" title="HashTable的扩容机制"></a>HashTable的扩容机制</h1><ol>
+<li>底层有数组 HashTable$Entry[] 初始化大小是11</li>
+<li>临界值是0.75</li>
+<li>扩容 按照自己的扩容机制来扩容</li>
+<li>执行 方法addEntry 封装到Entry</li>
+<li>当满足 添加的数量大于临界值时就自动的扩容</li>
+<li>扩容的机制是int newCapacity = (oldCapacity &lt;&lt; 1) + 1 的大小扩容 2倍加1</li>
+</ol>
+<h1 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h1><p>HashMap 是版本1.2出来的</p>
+<p>Hashtable是1.0出来的</p>
+<p>HashMap是线程不安全的</p>
+<p>HashTable是线程安全的</p>
+<p>HashMap效率高</p>
+<p>Hashtable效率不高</p>
+<p>HashMap允许NUll值</p>
+<p>HashTable不允许有空值</p>
 
       
 
@@ -351,7 +387,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Eexception-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E9%87%8D%E7%82%B9%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">Eexception(异常处理)重点！！！！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">异常介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E4%BD%93%E7%B3%BB%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">异常处理的体系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%E5%8C%85%E6%8B%AC"><span class="toc-number">1.3.</span> <span class="toc-text">常见的运行时异常包括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%BC%82%E5%B8%B8"><span class="toc-number">1.4.</span> <span class="toc-text">常见的编译异常</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">异常处理的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#throw%E5%BC%82%E5%B8%B8%E6%8A%9B%E5%87%BA"><span class="toc-number">3.</span> <span class="toc-text">throw异常抛出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-number">3.1.</span> <span class="toc-text">基本介绍</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ArraList%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E5%92%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">ArraList的底层结构和源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">ArrayList的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector%E5%92%8CArrayList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text">Vector和ArrayList的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">4.3.</span> <span class="toc-text">Vector的底层结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedList"><span class="toc-number">4.4.</span> <span class="toc-text">LinkedList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList%E8%B7%9FLinkedList%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">4.5.</span> <span class="toc-text">ArrayList跟LinkedList的比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HashSet"><span class="toc-number">5.1.</span> <span class="toc-text">HashSet</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Eexception-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E9%87%8D%E7%82%B9%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">Eexception(异常处理)重点！！！！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">异常介绍：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E4%BD%93%E7%B3%BB%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">异常处理的体系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%E5%8C%85%E6%8B%AC"><span class="toc-number">1.3.</span> <span class="toc-text">常见的运行时异常包括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%BC%82%E5%B8%B8"><span class="toc-number">1.4.</span> <span class="toc-text">常见的编译异常</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">基本介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">异常处理的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#throw%E5%BC%82%E5%B8%B8%E6%8A%9B%E5%87%BA"><span class="toc-number">3.</span> <span class="toc-text">throw异常抛出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D-1"><span class="toc-number">3.1.</span> <span class="toc-text">基本介绍</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ArraList%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E5%92%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">ArraList的底层结构和源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">ArrayList的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector%E5%92%8CArrayList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text">Vector和ArrayList的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">4.3.</span> <span class="toc-text">Vector的底层结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedList"><span class="toc-number">4.4.</span> <span class="toc-text">LinkedList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList%E8%B7%9FLinkedList%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">4.5.</span> <span class="toc-text">ArrayList跟LinkedList的比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HashSet"><span class="toc-number">5.1.</span> <span class="toc-text">HashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedHashSet"><span class="toc-number">5.2.</span> <span class="toc-text">LinkedHashSet</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6%E5%92%8C%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">HashMap的底层机制和扩容机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HashTable%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-number">7.</span> <span class="toc-text">HashTable接口的实现类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HashTable%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-number">8.</span> <span class="toc-text">HashTable的扩容机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HashMap%E5%92%8CHashTable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">9.</span> <span class="toc-text">HashMap和HashTable的区别</span></a></li></ol>
                     </div>
                 </span>
             </div>
